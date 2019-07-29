@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block body %}
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('{{ fullname.background_image.url }}')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <img style="width: 200px; border-radius: 20px;" src="{{ fullname.profile_image.url }}">
+                    <h1>{{ fullname.user.get_full_name }}</h1>
+                    <span class="subheading">{{ fullname.about }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 mx-auto">
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Şəkil</th>
+                            <th>Başlıq</th>
+                            <th>Paylaşıldığı tarix</th>
+                            <th>Əməliyyatlar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {% for obj in profil %}
+
+                                <td>1</td>
+                                <td><img style="width: 150px;" src="{{ obj.image.url }}"></td>
+                                <td>{{ obj.title }}</td>
+
+                                <td>{{ obj.date|date:"F d,Y" }}</td>
+                                <td><a class="btn btn-success" href="{% url 'update' obj.id %}">Düzəliş et</a>
+                                   <a class="btn btn-danger"  href="{% url 'delete' obj.id %}">Sil</a>
+                                </td>
+                                </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Pager -->
+            <div class="clearfix">
+                <a class="btn btn-primary float-left" href="#">Səhifələmə</a>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <!-- Modal -->
+{#    <div id="myModal" class="modal fade" role="dialog">#}
+{#        <div class="modal-dialog">#}
+{#            <form>#}
+{#                <!-- Modal content-->#}
+{#                <div class="modal-content">#}
+{#                    <div class="modal-header">#}
+{#                        <h4 class="modal-title">Müasir multifaktorlu autentifikasiya texnologiyaları icmalı</h4>#}
+{#                        <button type="button" class="close" data-dismiss="modal">&times;</button>#}
+{##}
+{#                    </div>#}
+{#                    <div class="modal-body">#}
+{#                        <p>Bu xəbəri silmək istədiyinizə əminsiniz?</p>#}
+{#                    </div>#}
+{#                    <div class="modal-footer">#}
+{#                        <button type="submit" class="btn btn-success" data-dismiss="modal" href="{% url "delete" profil.id %}">Sil</button>#}
+{#                        <button type="button" class="btn btn-danger" data-dismiss="modal">Bağla</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{% endblock %}

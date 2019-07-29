@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Contact{% endblock %}
+{% block body %}
+
+
+
+    <header class="masthead" style="background-image: url('{{ contact_me.img.url }}')">
+
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="page-heading">
+                        <h1>{{ contact_me.title }}</h1>
+                        <span class="subheading">{{ contact_me.description }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        {% if messages %}
+
+            </div>
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+            <form method="POST" id="contact_form">
+                <div class="div">{{ contact_me.text }}</div>
+                {% csrf_token %}
+                {% for i in contact_form %}
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>{{ i.label }}</label>
+                            {{ i }}
+                            {% if contact_form.errors %}
+                                {% for error in i.errors %}
+                                    <div class="text-danger">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <br>
+                <div class="form-group">
+                    <button type="submit" data-toggle="modal" data-target="#exampleModalLong"
+                            class="btn btn-primary btn-xl" id="sendMessageButton">Send
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}

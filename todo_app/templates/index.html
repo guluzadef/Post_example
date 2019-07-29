@@ -1,0 +1,61 @@
+
+{% extends "base.html" %}
+{% block title %} Ana Sehfe {% endblock %}
+{% block body %}
+
+{% for main_item in main %}
+<header class="masthead" id="home" style="background-image:url('{{ main_item.img.url }}')">
+
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+
+                        <h1>{{ main_item.title }}</h1>
+                        <span class="subheading">{{ main_item.description }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endfor %}
+
+<!-- Main Content -->
+<div class="container" id="text">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-preview">
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'post' %}" class="btn btn-success" style="background-color: #c5c5d8">Meqale Yarat</a>
+                {% endif %}
+                {% for text in article %}
+                    <a href="{% url 'detail-view' text.id %}">
+                        <h2 class="post-title">
+                            {{ text.title }}
+                        </h2>
+                        <h3 class="post-subtitle">
+                            {{ text.description|safe }}
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by
+                        <a href="{% url 'author' text.user.id %}">{{ text.user }}</a>
+
+                        {{ text.date|date:"F d,Y" }}</p>
+                {% endfor %}
+
+            </div>
+            <hr>
+
+            <!-- Pager -->
+            <div class="clearfix">
+                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+
+{% endblock %}

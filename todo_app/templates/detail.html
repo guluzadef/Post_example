@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block body %}
+
+    <!-- Navigation -->
+
+
+    <!-- Page Header -->
+
+    <header class="masthead" style="background-image: url('{{ text.image.url }}')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+              <h1>{{ text.title }}</h1>
+              <h2 class="subheading">{{ text.description }}</h2>
+              <span class="meta">Posted by
+                <a href="{% url 'author' text.user.id %}">{{ text.user }}</a>
+                 {{ text.date|date:"F d,Y" }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <p>{{ text.content|safe }}</p>
+
+
+
+                <!-- Pager -->
+                <div class="clearfix">
+                    <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+{% endblock %}
+
+<!-- Footer -->
+
+
+{#    <!-- Bootstrap core JavaScript -->#}
+{#    <script src="vendor/jquery/jquery.min.js"></script>#}
+{#    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>#}
+{##}
+{#    <!-- Custom scripts for this template -->#}
+{#    <script src="js/clean-blog.min.js"></script>#}
+
+

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block body %}
+
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ fullname.get_background_image }}')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <img style="width: 200px; border-radius: 20px;" src="{{ fullname.get_profile_image }}">
+                    <h1>{{ fullname.user.get_full_name }}</h1>
+                    <span class="subheading">{{ fullname.about }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-preview">
+                {% for obj in objects %}
+                    <a href="{% url 'detail-view' obj.id %}">
+                        <h2 class="post-title">
+
+                            {{ obj.title }}
+                        </h2>
+                        <h3 class="post-subtitle">
+                            {{ obj.description }}
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by
+                        <a href="#">{{ obj.user }}</a>
+                        {{ obj.date|date:"F d,Y" }}</p>
+                {% endfor %}
+                <!-- Pager -->
+                <div class="clearfix">
+                    <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

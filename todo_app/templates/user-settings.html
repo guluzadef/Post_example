@@ -1,0 +1,44 @@
+<!-- Page Header -->
+{% extends "base.html" %}
+{% block body %}
+    <header class="masthead" style="background-image: url('img/code-coding-computer.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="page-heading">
+                        <h1>Istifadeci tenzimlemeleri</h1>
+                        <span class="subheading"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for field in settings %}
+                            <div class="form-group">
+                                <label for=" {{ field.id_for_label }}">{{ field.label }}:</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for msg in field.errors %}
+                                        <span class="text-danger">{{ msg }}</span>
+                                    {% endfor %}
+                                {% endif %}
+
+                            </div>
+                        {% endfor %}
+                    <button type="submit"> Save</button>
+                        <a href="{% url "home" %}"> Cancel</a>
+
+                    </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

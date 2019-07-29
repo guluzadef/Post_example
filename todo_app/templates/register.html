@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Resgitration{% endblock %}
+{% block body %}
+
+
+    <header class="masthead" style="background-image: url('{{ register.img.url }}')">
+
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="page-heading">
+                        <h1>{{ register.title }}</h1>
+                        <span class="subheading">{{ register.description }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% if messages %}
+        <div class="alert alert-success">
+
+            {% for msg in messages %}
+                {{ msg }}
+            {% endfor %}
+
+        </div>
+    {% endif %}
+    <div class="container">
+        <h2>Registration</h2>
+        <form method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for=" {{ field.id_for_label }}">{{ field.label }}:</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        {% for msg in field.errors %}
+                            <span class="text-danger">{{ msg }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+{% endblock %}

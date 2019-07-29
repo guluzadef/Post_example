@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block body %}
+
+    <header class="masthead" style="background-image: url('{{ update.image.url }}')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-heading">
+                        <h1>{{ update.title }}</h1>
+                        <h2>{{ update.description }}</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ postform.media }}
+                        {% for field in postform %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for msg in field.errors %}
+                                        <span class="text-danger">{{ msg }}</span>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-success">Save</button>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </article>
+{% endblock %}
